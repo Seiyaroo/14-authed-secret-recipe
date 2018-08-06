@@ -1,4 +1,4 @@
-package com.example.AuthDemo.pojos;
+package com.auth.pojos;
 
 // Model information collected from the "create an account" form.
 public class UserPojo {

@@ -1,6 +1,6 @@
-package com.example.AuthDemo.db;
+package com.auth.db;
 
-import com.example.AuthDemo.models.User;
+import com.auth.models.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
@@ -8,9 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 public class UserDB {
     private static Connection mConn;
@@ -38,7 +36,7 @@ public class UserDB {
     }
 
     public static void reset() {
-        String sql = "DROP DATABASE IF EXISTS  javaauth; " +
+        String sql = "DROP DATABASE IF EXISTS javaauth; " +
                 "CREATE DATABASE javaauth; " +
                 "DROP TABLE IF EXISTS users; " +
                 "CREATE TABLE users ( " +
@@ -48,8 +46,7 @@ public class UserDB {
                 "        bio text " +
                 "); " +
                 "INSERT INTO users(username, passhash, bio) " +
-                "VALUES('moonmayor', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se', 'Been running this moon a long time now.'), " +
-                "       ('otheruser', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se', 'Other person. Same password. OK!'); ";
+                "VALUES("");
 
         try {
             mConn.createStatement().execute(sql);

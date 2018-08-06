@@ -1,7 +1,6 @@
-package com.example.AuthDemo.models;
+package com.auth.models;
 
-import com.example.AuthDemo.mock.MockUserDB;
-import com.example.AuthDemo.pojos.UserPojo;
+import com.auth.pojos.UserPojo;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
