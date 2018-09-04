@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class UserDB {
     private static Connection mConn;
@@ -17,9 +18,13 @@ public class UserDB {
         try {
             Class.forName("org.postgresql.Driver");
             String url = "jdbc:postgresql://localhost:5432/javaauth";
+            Properties props = new Properties();
+            // use these properties if you need to provide a username or password.
+            props.setProperty("user","tara");
+            props.setProperty("password","password");
 
             try {
-                mConn = DriverManager.getConnection(url);
+                mConn = DriverManager.getConnection(url, props);
                 ResultSet results = mConn.createStatement().executeQuery("SELECT * FROM users");
                 while (results.next()) {
                     int id = results.getInt("id");
@@ -36,7 +41,7 @@ public class UserDB {
     }
 
     public static void reset() {
-        String sql = "DROP DATABASE IF EXISTS javaauth; " +
+        String sql = "DROP DATABASE IF EXISTS  javaauth; " +
                 "CREATE DATABASE javaauth; " +
                 "DROP TABLE IF EXISTS users; " +
                 "CREATE TABLE users ( " +
@@ -46,7 +51,8 @@ public class UserDB {
                 "        bio text " +
                 "); " +
                 "INSERT INTO users(username, passhash, bio) " +
-                "VALUES("");
+                "VALUES('moonmayor', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se', 'Been running this moon a long time now.'), " +
+                "       ('otheruser', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se', 'Other person. Same password. OK!'); ";
 
         try {
             mConn.createStatement().execute(sql);
@@ -122,9 +128,9 @@ public class UserDB {
             }
 
             int id = results.getInt("id");
-            String username = results.getString("username");
-            String passhash = results.getString("passhash");
-            String bio = results.getString("bio");
+            String username = results.getString("username").trim();
+            String passhash = results.getString("passhash").trim();
+            String bio = results.getString("bio").trim();
 
             User user = new User(id, username, passhash, bio);
             return user;
