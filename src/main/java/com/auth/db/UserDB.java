@@ -18,13 +18,13 @@ public class UserDB {
         try {
             Class.forName("org.postgresql.Driver");
             String url = "jdbc:postgresql://localhost:5432/javaauth";
-            Properties props = new Properties();
+//            Properties props = new Properties();
             // use these properties if you need to provide a username or password.
-            props.setProperty("user","tara");
-            props.setProperty("password","password");
+//            props.setProperty("user","nick");
+//            props.setProperty("password","nicklas");
 
             try {
-                mConn = DriverManager.getConnection(url, props);
+                mConn = DriverManager.getConnection(url); //props might be needed
                 ResultSet results = mConn.createStatement().executeQuery("SELECT * FROM users");
                 while (results.next()) {
                     int id = results.getInt("id");
@@ -174,3 +174,5 @@ public class UserDB {
 
     }
 }
+
+//Putting this in to submit to darcy. 
